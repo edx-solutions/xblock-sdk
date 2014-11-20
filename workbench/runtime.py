@@ -25,6 +25,7 @@ from xblock.exceptions import NoSuchDefinition, NoSuchUsage
 from xblock.fragment import Fragment
 
 import xblock.reference.plugins
+import xblock.reference.current_user
 
 from .models import XBlockState
 from .util import make_safe_for_html
@@ -179,8 +180,28 @@ class WorkbenchRuntime(Runtime):
     def __init__(self, user_id=None):
         #  TODO: Add params for user, runtime, etc. to service initialization
         #  Move to stevedor
-        super(WorkbenchRuntime, self).__init__(ID_MANAGER, KvsFieldData(WORKBENCH_KVS),
-                                               services={'fs': xblock.reference.plugins.FSService()})
+        dummy_user = xblock.reference.current_user.CurrentXBlockUser(
+            is_authenticated=True,
+            email="user@example.com",
+            full_name="XBlock User",
+            username="xblockuser",
+            anon_id=user_id,
+            course_anon_id=user_id,
+        )
+
+        def get_user():
+            return dummy_user
+
+        super(WorkbenchRuntime, self).__init__(
+            ID_MANAGER,
+            KvsFieldData(WORKBENCH_KVS),
+            services={
+                'fs': xblock.reference.plugins.FSService(),
+                'user': xblock.reference.current_user.CurrentUserService(
+                    get_current_user=get_user
+                ),
+            }
+        )
         self.id_generator = ID_MANAGER
         self.user_id = user_id
 
