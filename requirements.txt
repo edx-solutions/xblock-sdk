@@ -1,5 +1,6 @@
 # This is from edx-solutions fork since we need it freezed
--e git+https://github.com/edx-solutions/XBlock.git@80d11e883cb0f4b554e1e566294cb7de383cffed#egg=XBlock
+-e git+https://github.com/edx/XBlock.git@e5e8eea05a13688a63825c80ed743ed47340a2a4#egg=XBlock
+-e git+https://github.com/edx/opaque-keys.git@27dc382ea587483b1e3889a3d19cbd90b9023a06#egg=opaque_keys
 
 #acid xblock
 -e git+https://github.com/edx/acid-block.git@459aff7b63db8f2c5decd1755706c1a64fb4ebb1#egg=acid-xblock
