@@ -1,6 +1,9 @@
 XBlock SDK |build-status| |coverage-status|
 ===========================================
 
+Notice: This repo will be archived in April 2021.
+#######
+
 This repository consists of three main components to assist in the creation of new XBlocks:
 
     * a template-based generator for new XBlocks (found in `prototype`)
